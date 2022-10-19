@@ -56,7 +56,7 @@ function getTurnData(authors) {
 
   return {
     books: fourRandomBooks,
-    authors: authors.find((author) =>
+    author: authors.find((author) =>
       author.books.some((title) => title === answer)
     ),
   };
@@ -64,10 +64,22 @@ function getTurnData(authors) {
 
 const state = {
   turnData: getTurnData(authors),
+  highlight: "",
 };
 
-ReactDOM.render(<AuthorQuiz {...state} />, document.getElementById("root"));
+function onAnswerSeleted(answer) {
+  const isCorrect = state.turnData.author.books.some((book) => book === answer);
+  state.highlight = isCorrect ? "correct" : "wrong";
+  render();
+}
 
+function render() {
+  ReactDOM.render(
+    <AuthorQuiz {...state} onAnswerSeleted={onAnswerSeleted} />,
+    document.getElementById("root")
+  );
+}
+render();
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
