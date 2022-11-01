@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./index.css";
 import AuthorQuiz from "./AuthorQuiz";
 import reportWebVitals from "./reportWebVitals";
@@ -73,9 +74,17 @@ function onAnswerSeleted(answer) {
   render();
 }
 
+function App() {
+  return <AuthorQuiz {...state} onAnswerSeleted={onAnswerSeleted} />;
+}
+
 function render() {
   ReactDOM.render(
-    <AuthorQuiz {...state} onAnswerSeleted={onAnswerSeleted} />,
+    <BrowserRouter>
+      <Routes>
+        <Route exact path="/" element={<App />}></Route>
+      </Routes>
+    </BrowserRouter>,
     document.getElementById("root")
   );
 }
