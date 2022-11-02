@@ -73,6 +73,15 @@ function onAnswerSeleted(answer) {
   state.highlight = isCorrect ? "correct" : "wrong";
   render();
 }
+function AddAuthorForm({ match }) {
+  console.log(match);
+  return (
+    <div>
+      <h1>Add Author</h1>
+      <p>{JSON.stringify(match)}</p>
+    </div>
+  );
+}
 
 function App() {
   return <AuthorQuiz {...state} onAnswerSeleted={onAnswerSeleted} />;
@@ -83,6 +92,7 @@ function render() {
     <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<App />}></Route>
+        <Route path="/add" element={<AddAuthorForm />}></Route>
       </Routes>
     </BrowserRouter>,
     document.getElementById("root")
